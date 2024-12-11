@@ -1,6 +1,7 @@
 package com.bcc.soccer.controller;
 
 import com.bcc.soccer.dto.PlayerDTO;
+import com.bcc.soccer.dto.PlayerTeamDTO;
 import com.bcc.soccer.dto.PlayersPositionDTO;
 import com.bcc.soccer.dto.StadiumDTO;
 import com.bcc.soccer.dto.TeamPlayerCountDTO;
@@ -107,6 +108,12 @@ public class PlayerController {
     public ResponseEntity<List<PlayerDTO>> findAllPlayersOrderedByPositionDesc() {
         List<PlayerDTO> dbPlayers = playerService.findAllPlayersOrderedByPositionDesc();
         return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/teams")
+    public ResponseEntity<List<PlayerTeamDTO>> findAllPlayersWithTeamName() {
+        List<PlayerTeamDTO> response = playerService.findAllPlayersWithTeamName();
+        return ResponseEntity.status(200).body(response);
     }
 
     @PutMapping("/{id}")

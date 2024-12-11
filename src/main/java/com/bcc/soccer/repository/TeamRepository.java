@@ -1,5 +1,7 @@
 package com.bcc.soccer.repository;
 
+import com.bcc.soccer.dto.PlayerTeamDTO;
+import com.bcc.soccer.dto.TeamStadiumDTO;
 import com.bcc.soccer.entity.Team;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +25,8 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 
     @Query("SELECT t FROM Team t ORDER BY t.foundedYear ASC")
     List<Team> findAllTeamsOrderedByFoundationYear();
+
+    @Query("SELECT new com.bcc.soccer.dto.TeamStadiumDTO(t.name, s.name) " +
+            "FROM Team t JOIN t.stadium s")
+    List<TeamStadiumDTO> findAllTeamsWithStadiumName();
 }

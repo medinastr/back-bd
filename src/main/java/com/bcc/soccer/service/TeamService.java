@@ -2,6 +2,7 @@ package com.bcc.soccer.service;
 
 import com.bcc.soccer.dto.PlayerDTO;
 import com.bcc.soccer.dto.TeamDTO;
+import com.bcc.soccer.dto.TeamStadiumDTO;
 import com.bcc.soccer.entity.Team;
 import com.bcc.soccer.exception.ObjectNotFoundException;
 import com.bcc.soccer.repository.PlayerRepository;
@@ -57,6 +58,10 @@ public class TeamService {
         return teamRepository.findAllTeamsOrderedByFoundationYear().stream()
                 .map(TeamDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<TeamStadiumDTO> findAllTeamsWithStadiumName() {
+        return teamRepository.findAllTeamsWithStadiumName();
     }
 
     public TeamDTO updateTeam(int id, TeamDTO teamDTO) {

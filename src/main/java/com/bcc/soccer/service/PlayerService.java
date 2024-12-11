@@ -1,6 +1,7 @@
 package com.bcc.soccer.service;
 
 import com.bcc.soccer.dto.PlayerDTO;
+import com.bcc.soccer.dto.PlayerTeamDTO;
 import com.bcc.soccer.dto.PlayersPositionDTO;
 import com.bcc.soccer.dto.TeamPlayerCountDTO;
 import com.bcc.soccer.entity.Player;
@@ -101,6 +102,10 @@ public class PlayerService {
         return playerRepository.findAllPlayersOrderedByPositionDesc().stream()
                 .map(PlayerDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<PlayerTeamDTO> findAllPlayersWithTeamName() {
+        return playerRepository.findAllPlayersWithTeamName();
     }
 
     public PlayerDTO updatePlayer(int id, PlayerDTO playerDTO) {

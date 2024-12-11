@@ -1,5 +1,6 @@
 package com.bcc.soccer.repository;
 
+import com.bcc.soccer.dto.PlayerTeamDTO;
 import com.bcc.soccer.dto.PlayersPositionDTO;
 import com.bcc.soccer.dto.TeamPlayerCountDTO;
 import com.bcc.soccer.entity.Player;
@@ -52,4 +53,8 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
     @Query("SELECT p FROM Player p ORDER BY p.name DESC")
     List<Player> findAllPlayersOrderedByPositionDesc();
+
+    @Query("SELECT new com.bcc.soccer.dto.PlayerTeamDTO(p.name, t.name) " +
+            "FROM Player p JOIN p.team t")
+    List<PlayerTeamDTO> findAllPlayersWithTeamName();
 }

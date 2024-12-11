@@ -2,6 +2,7 @@ package com.bcc.soccer.controller;
 
 import com.bcc.soccer.dto.PlayerDTO;
 import com.bcc.soccer.dto.TeamDTO;
+import com.bcc.soccer.dto.TeamStadiumDTO;
 import com.bcc.soccer.entity.Player;
 import com.bcc.soccer.entity.Team;
 import com.bcc.soccer.service.TeamService;
@@ -66,6 +67,12 @@ public class TeamController {
     public ResponseEntity<List<TeamDTO>> findAllTeamsOrderedByFoundationYear() {
         List<TeamDTO> dbTeams = teamService.findAllTeamsOrderedByFoundationYear();
         return ResponseEntity.status(200).body(dbTeams);
+    }
+
+    @GetMapping("/stadiums")
+    public ResponseEntity<List<TeamStadiumDTO>> findAllTeamsWithStadiumName() {
+        List<TeamStadiumDTO> response = teamService.findAllTeamsWithStadiumName();
+        return ResponseEntity.status(200).body(response);
     }
 
     @PutMapping("/{id}")
