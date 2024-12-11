@@ -1,6 +1,7 @@
 package com.bcc.soccer.service;
 
 import com.bcc.soccer.dto.StadiumDTO;
+import com.bcc.soccer.dto.TeamDTO;
 import com.bcc.soccer.entity.Stadium;
 import com.bcc.soccer.entity.Team;
 import com.bcc.soccer.exception.ObjectNotFoundException;
@@ -45,6 +46,10 @@ public class StadiumService {
         return stadiumRepository.findStadiumsByNameContaining(search).stream()
                 .map(StadiumDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public double calculateAverageStadiumCapacity() {
+        return stadiumRepository.calculateAverageStadiumCapacity();
     }
 
     public StadiumDTO updateStadium(int id, StadiumDTO stadiumDTO) {

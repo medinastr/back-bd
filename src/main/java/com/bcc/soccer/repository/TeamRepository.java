@@ -16,4 +16,9 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
 
     @Query("SELECT t FROM Team t WHERE t.stadium.capacity > :capacity")
     List<Team> findTeamsByStadiumCapacityGreaterThan(@Param("capacity") Integer capacity);
+
+    @Query("SELECT t FROM Team t " +
+            "WHERE (SELECT COUNT(p) FROM Player p WHERE p.team.id = t.id) > :minPlayers")
+    List<Team> findTeamsWithMoreThanXPlayers(@Param("minPlayers") Integer minPlayers);
+
 }

@@ -53,6 +53,12 @@ public class StadiumController {
         return ResponseEntity.status(200).body(dbStadiums);
     }
 
+    @GetMapping("/capacity-avg")
+    public ResponseEntity<Double> calculateAverageStadiumCapacity() {
+        Double avg = stadiumService.calculateAverageStadiumCapacity();
+        return ResponseEntity.status(200).body(avg);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<StadiumDTO> updateStadium(@PathVariable int id, @RequestBody StadiumDTO stadiumDTO) {
         StadiumDTO updatedStadium = stadiumService.updateStadium(id, stadiumDTO);

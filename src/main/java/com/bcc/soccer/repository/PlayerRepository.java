@@ -1,5 +1,6 @@
 package com.bcc.soccer.repository;
 
+import com.bcc.soccer.dto.PlayersPositionDTO;
 import com.bcc.soccer.dto.TeamPlayerCountDTO;
 import com.bcc.soccer.entity.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -34,4 +35,13 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
     @Query("SELECT p FROM Player p WHERE LENGTH(p.name) = :length")
     List<Player> findPlayersByNameLength(@Param("length") int length);
+
+    @Query("SELECT COUNT(p) FROM Player p")
+    long countTotalPlayers();
+
+    @Query("SELECT new com.bcc.soccer.dto.PlayersPositionDTO(p.position, COUNT(p)) " +
+            "FROM Player p " +
+            "GROUP BY p.position")
+    List<PlayersPositionDTO> countPlayersByPosition();
+
 }

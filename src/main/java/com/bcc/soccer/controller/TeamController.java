@@ -3,6 +3,7 @@ package com.bcc.soccer.controller;
 import com.bcc.soccer.dto.PlayerDTO;
 import com.bcc.soccer.dto.TeamDTO;
 import com.bcc.soccer.entity.Player;
+import com.bcc.soccer.entity.Team;
 import com.bcc.soccer.service.TeamService;
 import jdk.dynalink.linker.LinkerServices;
 import jdk.javadoc.doclet.Reporter;
@@ -52,6 +53,12 @@ public class TeamController {
     @GetMapping("/capacity-greater-than/{capacity}")
     public ResponseEntity<List<TeamDTO>> findTeamByStadiumCapacity(Integer capacity) {
         List<TeamDTO> dbTeams = teamService.findTeamByStadiumCapacity(capacity);
+        return ResponseEntity.status(200).body(dbTeams);
+    }
+
+    @GetMapping("/min-players/{min}")
+    public ResponseEntity<List<TeamDTO>> findTeamsWithMoreThanXPlayers(Integer min) {
+        List<TeamDTO> dbTeams = teamService.findTeamsWithMoreThanXPlayers(min);
         return ResponseEntity.status(200).body(dbTeams);
     }
 

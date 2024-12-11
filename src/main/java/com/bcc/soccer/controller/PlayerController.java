@@ -1,6 +1,7 @@
 package com.bcc.soccer.controller;
 
 import com.bcc.soccer.dto.PlayerDTO;
+import com.bcc.soccer.dto.PlayersPositionDTO;
 import com.bcc.soccer.dto.StadiumDTO;
 import com.bcc.soccer.dto.TeamPlayerCountDTO;
 import com.bcc.soccer.service.PlayerService;
@@ -76,6 +77,18 @@ public class PlayerController {
     public ResponseEntity<List<PlayerDTO>> findPlayersByNameLength(@PathVariable int length) {
         List<PlayerDTO> dbPlayers = playerService.findPlayersByNameLength(length);
         return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> howManyPlayers() {
+        Long count = playerService.howManyPlayers();
+        return ResponseEntity.status(200).body(count);
+    }
+
+    @GetMapping("/position")
+    public ResponseEntity<List<PlayersPositionDTO>> countPlayersByPosition() {
+        List<PlayersPositionDTO> response = playerService.countPlayersByPosition();
+        return ResponseEntity.status(200).body(response);
     }
 
     @PutMapping("/{id}")

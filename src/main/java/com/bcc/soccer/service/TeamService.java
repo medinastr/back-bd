@@ -47,6 +47,12 @@ public class TeamService {
                 .collect(Collectors.toList());
     }
 
+    public List<TeamDTO> findTeamsWithMoreThanXPlayers(Integer min) {
+        return teamRepository.findTeamsWithMoreThanXPlayers(min).stream()
+                .map(TeamDTO::new)
+                .collect(Collectors.toList());
+    }
+
     public TeamDTO updateTeam(int id, TeamDTO teamDTO) {
         Team dbTeam = teamRepository.findById(id)
                 .orElseThrow(ObjectNotFoundException::new);

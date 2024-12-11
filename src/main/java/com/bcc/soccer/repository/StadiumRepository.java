@@ -18,4 +18,7 @@ public interface StadiumRepository extends JpaRepository<Stadium, Integer> {
 
     @Query("SELECT s FROM Stadium s WHERE s.name LIKE %:searchString%")
     List<Stadium> findStadiumsByNameContaining(@Param("searchString") String searchString);
+
+    @Query("SELECT AVG(s.capacity) FROM Stadium s")
+    double calculateAverageStadiumCapacity();
 }
