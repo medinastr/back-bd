@@ -59,6 +59,12 @@ public class StadiumController {
         return ResponseEntity.status(200).body(avg);
     }
 
+    @GetMapping("/capacity-order-desc")
+    public ResponseEntity<List<StadiumDTO>> findAllStadiumsOrderedByCapacityDesc() {
+        List<StadiumDTO> dbStadiums = stadiumService.findAllStadiumsOrderedByCapacityDesc();
+        return ResponseEntity.status(200).body(dbStadiums);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<StadiumDTO> updateStadium(@PathVariable int id, @RequestBody StadiumDTO stadiumDTO) {
         StadiumDTO updatedStadium = stadiumService.updateStadium(id, stadiumDTO);

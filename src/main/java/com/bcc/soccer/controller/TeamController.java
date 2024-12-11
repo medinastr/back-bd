@@ -62,6 +62,12 @@ public class TeamController {
         return ResponseEntity.status(200).body(dbTeams);
     }
 
+    @GetMapping("/order-year")
+    public ResponseEntity<List<TeamDTO>> findAllTeamsOrderedByFoundationYear() {
+        List<TeamDTO> dbTeams = teamService.findAllTeamsOrderedByFoundationYear();
+        return ResponseEntity.status(200).body(dbTeams);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<TeamDTO> updateTeam(@PathVariable int id, @RequestBody TeamDTO teamDTO) {
         TeamDTO updatedTeam = teamService.updateTeam(id, teamDTO);

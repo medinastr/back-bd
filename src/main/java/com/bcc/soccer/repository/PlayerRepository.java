@@ -44,4 +44,12 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
             "GROUP BY p.position")
     List<PlayersPositionDTO> countPlayersByPosition();
 
+    @Query("SELECT p FROM Player p ORDER BY p.name ASC")
+    List<Player> findAllPlayersOrderedByName();
+
+    @Query("SELECT p FROM Player p ORDER BY p.team.id ASC, p.name ASC")
+    List<Player> findAllPlayersOrderedByTeamAndName();
+
+    @Query("SELECT p FROM Player p ORDER BY p.name DESC")
+    List<Player> findAllPlayersOrderedByPositionDesc();
 }

@@ -52,6 +52,12 @@ public class StadiumService {
         return stadiumRepository.calculateAverageStadiumCapacity();
     }
 
+    public List<StadiumDTO> findAllStadiumsOrderedByCapacityDesc() {
+        return stadiumRepository.findAllStadiumsOrderedByCapacityDesc().stream()
+                .map(StadiumDTO::new)
+                .collect(Collectors.toList());
+    }
+
     public StadiumDTO updateStadium(int id, StadiumDTO stadiumDTO) {
         Stadium dbStadium = stadiumRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Stadium not found."));

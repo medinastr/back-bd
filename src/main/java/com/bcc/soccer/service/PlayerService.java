@@ -85,6 +85,24 @@ public class PlayerService {
         return playerRepository.countPlayersByPosition();
     }
 
+    public List<PlayerDTO> findAllPlayersOrderedByName() {
+        return playerRepository.findAllPlayersOrderedByName().stream()
+                .map(PlayerDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<PlayerDTO> findAllPlayersOrderedByTeamAndName() {
+        return playerRepository.findAllPlayersOrderedByTeamAndName().stream()
+                .map(PlayerDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<PlayerDTO> findAllPlayersOrderedByPositionDesc() {
+        return playerRepository.findAllPlayersOrderedByPositionDesc().stream()
+                .map(PlayerDTO::new)
+                .collect(Collectors.toList());
+    }
+
     public PlayerDTO updatePlayer(int id, PlayerDTO playerDTO) {
         if(!playerRepository.existsById(id)) throw new ObjectNotFoundException("Player not exists.");
         Player player = new Player(playerDTO);

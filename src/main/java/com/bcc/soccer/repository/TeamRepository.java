@@ -21,4 +21,6 @@ public interface TeamRepository extends JpaRepository<Team, Integer> {
             "WHERE (SELECT COUNT(p) FROM Player p WHERE p.team.id = t.id) > :minPlayers")
     List<Team> findTeamsWithMoreThanXPlayers(@Param("minPlayers") Integer minPlayers);
 
+    @Query("SELECT t FROM Team t ORDER BY t.foundedYear ASC")
+    List<Team> findAllTeamsOrderedByFoundationYear();
 }

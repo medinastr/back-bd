@@ -21,4 +21,7 @@ public interface StadiumRepository extends JpaRepository<Stadium, Integer> {
 
     @Query("SELECT AVG(s.capacity) FROM Stadium s")
     double calculateAverageStadiumCapacity();
+
+    @Query("SELECT s FROM Stadium s ORDER BY s.capacity DESC")
+    List<Stadium> findAllStadiumsOrderedByCapacityDesc();
 }

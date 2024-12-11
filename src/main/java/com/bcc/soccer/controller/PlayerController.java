@@ -91,6 +91,24 @@ public class PlayerController {
         return ResponseEntity.status(200).body(response);
     }
 
+    @GetMapping("/order")
+    public ResponseEntity<List<PlayerDTO>> findAllPlayersOrderedByName() {
+        List<PlayerDTO> dbPlayers = playerService.findAllPlayersOrderedByName();
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/order-team_id-name")
+    public ResponseEntity<List<PlayerDTO>> findAllPlayersOrderedByTeamAndName() {
+        List<PlayerDTO> dbPlayers = playerService.findAllPlayersOrderedByTeamAndName();
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/order-desc")
+    public ResponseEntity<List<PlayerDTO>> findAllPlayersOrderedByPositionDesc() {
+        List<PlayerDTO> dbPlayers = playerService.findAllPlayersOrderedByPositionDesc();
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable int id, @RequestBody PlayerDTO playerDTO) {
         PlayerDTO dbPlayer = playerService.updatePlayer(id, playerDTO);
