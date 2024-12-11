@@ -10,7 +10,7 @@ CREATE TABLE stadium (
     name VARCHAR(100) NOT NULL,
     capacity INT NOT NULL,
     address_id INT UNIQUE,
-    FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE
+    CONSTRAINT fk_stadium_address_id FOREIGN KEY (address_id) REFERENCES address(id) ON DELETE CASCADE
 );
 
 CREATE TABLE team (
@@ -18,8 +18,17 @@ CREATE TABLE team (
     name VARCHAR(100) NOT NULL,
     founded_year INT NOT NULL,
     stadium_id INT UNIQUE,
-    FOREIGN KEY (stadium_id) REFERENCES stadium (id) ON DELETE SET NULL
+    CONSTRAINT fk_team_stadium_id FOREIGN KEY (stadium_id) REFERENCES stadium (id) ON DELETE SET NULL
 );
+
+ALTER TABLE stadium
+ADD COLUMN team_id INT;
+
+ALTER TABLE stadium
+ADD CONSTRAINT fk_stadium_team_id
+FOREIGN KEY (team_id)
+REFERENCES team (id)
+ON DELETE SET NULL;
 
 CREATE TABLE player (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -27,8 +36,11 @@ CREATE TABLE player (
     position VARCHAR(50) NOT NULL,
     team_id INT,
     address_id INT UNIQUE,
-    FOREIGN KEY (team_id) REFERENCES team (id) ON DELETE SET NULL,
-    FOREIGN KEY (address_id) REFERENCES address (id) ON DELETE CASCADE
+    CONSTRAINT fk_player_team_id
+    FOREIGN KEY (team_id)
+    REFERENCES team (id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION,
+    CONSTRAINT fk_address_id FOREIGN KEY (address_id) REFERENCES address (id) ON DELETE CASCADE
 );
 
 CREATE TABLE championship (

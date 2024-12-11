@@ -1,5 +1,6 @@
 package com.bcc.soccer.entity;
 
+import com.bcc.soccer.dto.ChampionshipDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,12 +30,15 @@ public class Championship {
 
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH}
-    )
+                    CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name="team_championship",
             joinColumns = @JoinColumn(name="championship_id"),
-            inverseJoinColumns = @JoinColumn(name="team_id")
-    )
+            inverseJoinColumns = @JoinColumn(name="team_id"))
     private List<Team> teams;
+
+    public Championship(ChampionshipDTO championshipDTO) {
+        this.id = championshipDTO.getId();
+        this.name = championshipDTO.getName();
+    }
 }

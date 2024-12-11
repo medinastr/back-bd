@@ -6,6 +6,7 @@ import com.bcc.soccer.entity.Team;
 import com.bcc.soccer.exception.ObjectNotFoundException;
 import com.bcc.soccer.repository.PlayerRepository;
 import com.bcc.soccer.repository.TeamRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +25,11 @@ public class PlayerService {
         this.teamRepository = teamRepository;
     }
 
+    @Transactional
     public PlayerDTO createPlayer(PlayerDTO playerDTO) {
-        Player player = new Player(playerDTO);
         Team team = teamRepository.findByName(playerDTO.getTeamName())
                 .orElseThrow(() -> new ObjectNotFoundException("Team name not exists."));
+        Player player = new Player(playerDTO);
         player.setTeam(team);
         System.out.println(player);
         return new PlayerDTO(playerRepository.save(player));

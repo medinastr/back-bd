@@ -31,8 +31,7 @@ public class Team {
 
     @OneToMany(mappedBy = "team", fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
-                    CascadeType.PERSIST, CascadeType.REFRESH}
-    )
+                    CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Player> players;
 
     @ManyToMany(fetch = FetchType.EAGER,

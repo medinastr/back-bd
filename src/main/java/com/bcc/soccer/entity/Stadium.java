@@ -24,6 +24,10 @@ public class Stadium {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
     public Stadium(StadiumDTO stadiumDTO) {
         this.id = stadiumDTO.getId();
         this.name = stadiumDTO.getName();
