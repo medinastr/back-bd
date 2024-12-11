@@ -16,9 +16,15 @@ public class TeamDTO {
 
     private Integer foundedYear;
 
+    private Integer fifaRanking;
+
+    private Integer marketValue;
+
     public TeamDTO(Team team) {
         this.id = team.getId();
         this.name = team.getName();
         this.foundedYear = team.getFoundedYear();
+        this.fifaRanking = team.getFifaRanking();
+        this.marketValue = team.getMarketValue();
     }
 }

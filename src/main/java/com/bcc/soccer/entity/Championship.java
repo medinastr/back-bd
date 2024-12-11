@@ -2,6 +2,7 @@ package com.bcc.soccer.entity;
 
 import com.bcc.soccer.dto.ChampionshipDTO;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,14 @@ public class Championship {
 
     private String name;
 
+    private Integer edition;
+
+    @Column(name = "start_date")
+    private String startDate;
+
+    @Column(name = "end_date")
+    private String endDate;
+
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
                     CascadeType.PERSIST, CascadeType.REFRESH})
@@ -40,5 +49,8 @@ public class Championship {
     public Championship(ChampionshipDTO championshipDTO) {
         this.id = championshipDTO.getId();
         this.name = championshipDTO.getName();
+        this.edition = championshipDTO.getEdition();
+        this.startDate = championshipDTO.getStartDate();
+        this.endDate = championshipDTO.getEndDate();
     }
 }

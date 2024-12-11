@@ -25,6 +25,12 @@ public class Team {
     @Column(name = "founded_year")
     private Integer foundedYear;
 
+    @Column(name = "fifa_ranking")
+    private Integer fifaRanking;
+
+    @Column(name = "market_value")
+    private Integer marketValue;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stadium_id")
     private Stadium stadium;
@@ -48,6 +54,8 @@ public class Team {
         this.id = teamDTO.getId();
         this.name = teamDTO.getName();
         this.foundedYear = teamDTO.getFoundedYear();
+        this.fifaRanking = teamDTO.getFifaRanking();
+        this.marketValue = teamDTO.getMarketValue();
     }
 }
 

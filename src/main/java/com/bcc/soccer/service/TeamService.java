@@ -36,6 +36,8 @@ public class TeamService {
                 .orElseThrow(ObjectNotFoundException::new);
         dbTeam.setName(teamDTO.getName());
         dbTeam.setFoundedYear(teamDTO.getFoundedYear());
+        dbTeam.setFifaRanking(teamDTO.getFifaRanking());
+        dbTeam.setMarketValue(teamDTO.getMarketValue());
         return new TeamDTO(teamRepository.save(dbTeam));
     }
 

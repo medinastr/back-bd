@@ -14,8 +14,17 @@ public class ChampionshipDTO {
 
     private String name;
 
+    private Integer edition;
+
+    private String startDate;
+
+    private String endDate;
+
     public ChampionshipDTO(Championship championship) {
         this.id = championship.getId();
         this.name = championship.getName();
+        this.edition = championship.getEdition();
+        this.startDate = championship.getStartDate();
+        this.endDate = championship.getEndDate();
     }
 }

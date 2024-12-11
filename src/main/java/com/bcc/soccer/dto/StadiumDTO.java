@@ -16,6 +16,10 @@ public class StadiumDTO {
 
     private Integer capacity;
 
+    private Integer builtYear;
+
+    private String owner;
+
     private String teamName;
 
     private AddressDTO addressDTO;
@@ -24,6 +28,8 @@ public class StadiumDTO {
         this.id = stadium.getId();
         this.name = stadium.getName();
         this.capacity = stadium.getCapacity();
+        this.builtYear = stadium.getBuiltYear();
+        this.owner = stadium.getOwner();
         if(stadium.getAddress() != null) this.addressDTO = new AddressDTO(stadium.getAddress());
     }
 }

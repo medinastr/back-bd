@@ -16,6 +16,10 @@ public class PlayerDTO {
 
     private String position;
 
+    private Integer shirtNumber;
+
+    private Integer marketValue;
+
     private String teamName;
 
     private AddressDTO addressDTO;
@@ -24,6 +28,8 @@ public class PlayerDTO {
         this.id = player.getId();
         this.name = player.getName();
         this.position = player.getPosition();
+        this.shirtNumber = player.getShirtNumber();
+        this.marketValue = player.getMarketValue();
         if(player.getTeam() != null) this.teamName = player.getTeam().getName();
         if(player.getAddress() != null) this.addressDTO = new AddressDTO(player.getAddress());
     }

@@ -23,6 +23,12 @@ public class Player {
 
     private String position;
 
+    @Column(name = "shirt_number")
+    private Integer shirtNumber;
+
+    @Column(name = "market_value")
+    private Integer marketValue;
+
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "team_id")
@@ -36,6 +42,8 @@ public class Player {
         this.id = playerDTO.getId();;
         this.name = playerDTO.getName();
         this.position = playerDTO.getPosition();
+        this.shirtNumber = playerDTO.getShirtNumber();
+        this.marketValue = playerDTO.getMarketValue();
         if(playerDTO.getAddressDTO() != null) this.address = new Address(playerDTO.getAddressDTO());
     }
 

@@ -41,6 +41,8 @@ public class StadiumService {
         dbStadium.setId(id);
         dbStadium.setName(stadiumDTO.getName());
         dbStadium.setCapacity(stadiumDTO.getCapacity());
+        dbStadium.setBuiltYear(stadiumDTO.getBuiltYear());
+        dbStadium.setOwner(stadiumDTO.getOwner());
         return new StadiumDTO(stadiumRepository.save(dbStadium));
     }
 

@@ -35,6 +35,9 @@ public class ChampionshipService {
         Championship championship = championshipRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Championship not exists."));
         championship.setName(championshipDTO.getName());
+        championship.setEdition(championshipDTO.getEdition());
+        championship.setStartDate(championshipDTO.getStartDate());
+        championship.setEndDate(championshipDTO.getEndDate());
         return new ChampionshipDTO(championshipRepository.save(championship));
     }
 

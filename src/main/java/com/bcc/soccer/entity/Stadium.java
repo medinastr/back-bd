@@ -20,6 +20,11 @@ public class Stadium {
 
     private Integer capacity;
 
+    @Column(name = "built_year")
+    private Integer builtYear;
+
+    private String owner;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private Address address;
@@ -32,6 +37,8 @@ public class Stadium {
         this.id = stadiumDTO.getId();
         this.name = stadiumDTO.getName();
         this.capacity = stadiumDTO.getCapacity();
+        this.builtYear = stadiumDTO.getBuiltYear();
+        this.owner = stadiumDTO.getOwner();
         if(stadiumDTO.getAddressDTO() != null) this.address = new Address(stadiumDTO.getAddressDTO());
     }
 }
