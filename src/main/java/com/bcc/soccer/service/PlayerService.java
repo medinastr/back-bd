@@ -1,6 +1,7 @@
 package com.bcc.soccer.service;
 
 import com.bcc.soccer.dto.PlayerDTO;
+import com.bcc.soccer.dto.TeamPlayerCountDTO;
 import com.bcc.soccer.entity.Player;
 import com.bcc.soccer.entity.Team;
 import com.bcc.soccer.exception.ObjectNotFoundException;
@@ -39,6 +40,16 @@ public class PlayerService {
         return playerRepository.findAll().stream()
                 .map(PlayerDTO::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<PlayerDTO> findAllBySameStadiumAddress(int stadiumId) {
+        return playerRepository.findAllBySameStadiumAddress(stadiumId).stream()
+                .map(PlayerDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<TeamPlayerCountDTO> countPlayersByTeam() {
+        return playerRepository.countPlayersByTeam();
     }
 
     public PlayerDTO updatePlayer(int id, PlayerDTO playerDTO) {

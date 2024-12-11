@@ -1,8 +1,11 @@
 package com.bcc.soccer.controller;
 
 import com.bcc.soccer.dto.PlayerDTO;
+import com.bcc.soccer.dto.StadiumDTO;
+import com.bcc.soccer.dto.TeamPlayerCountDTO;
 import com.bcc.soccer.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchTransactionManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +40,18 @@ public class PlayerController {
     public ResponseEntity<List<PlayerDTO>> findAllPlayers() {
         List<PlayerDTO> dbPlayers = playerService.findAllPlayers();
         return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/same-stadium-address/{stadiumId}")
+    public ResponseEntity<List<PlayerDTO>> findAllBySameStadiumAddress(@PathVariable int stadiumId) {
+        List<PlayerDTO> dbPlayers = playerService.findAllBySameStadiumAddress(stadiumId);
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/count-players-by-team")
+    public ResponseEntity<List<TeamPlayerCountDTO>> countPlayersByTeam() {
+        List<TeamPlayerCountDTO> counts = playerService.countPlayersByTeam();
+        return ResponseEntity.status(200).body(counts);
     }
 
     @PutMapping("/{id}")

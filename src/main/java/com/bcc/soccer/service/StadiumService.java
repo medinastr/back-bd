@@ -35,6 +35,12 @@ public class StadiumService {
                 .collect(Collectors.toList());
     }
 
+    public List<StadiumDTO> findAllTeamsStadiumAfter(int year) {
+        return stadiumRepository.findAllTeamsStadiumAfter(year).stream()
+                .map(StadiumDTO::new)
+                .collect(Collectors.toList());
+    }
+
     public StadiumDTO updateStadium(int id, StadiumDTO stadiumDTO) {
         Stadium dbStadium = stadiumRepository.findById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Stadium not found."));

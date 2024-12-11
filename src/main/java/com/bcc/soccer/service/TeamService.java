@@ -1,8 +1,10 @@
 package com.bcc.soccer.service;
 
+import com.bcc.soccer.dto.PlayerDTO;
 import com.bcc.soccer.dto.TeamDTO;
 import com.bcc.soccer.entity.Team;
 import com.bcc.soccer.exception.ObjectNotFoundException;
+import com.bcc.soccer.repository.PlayerRepository;
 import com.bcc.soccer.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,12 @@ import java.util.stream.Collectors;
 public class TeamService {
 
     private final TeamRepository teamRepository;
+    private final PlayerRepository playerRepository;
 
     @Autowired
-    public TeamService(TeamRepository teamRepository) {
+    public TeamService(TeamRepository teamRepository, PlayerRepository playerRepository) {
         this.teamRepository = teamRepository;
+        this.playerRepository = playerRepository;
     }
 
     public TeamDTO createTeam(TeamDTO teamDTO) {
@@ -27,6 +31,18 @@ public class TeamService {
 
     public List<TeamDTO> findAllTeams() {
         return teamRepository.findAll().stream()
+                .map(TeamDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<PlayerDTO> findAllTeamPlayers(int id) {
+        return playerRepository.findAllByTeamId(id).stream()
+                .map(PlayerDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<TeamDTO> findTeamByStadiumCapacity(Integer capacity) {
+        return teamRepository.findTeamsByStadiumCapacityGreaterThan(capacity).stream()
                 .map(TeamDTO::new)
                 .collect(Collectors.toList());
     }
