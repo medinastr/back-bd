@@ -1,5 +1,6 @@
 package com.bcc.soccer.controller;
 
+import com.bcc.soccer.dto.PlayerDTO;
 import com.bcc.soccer.dto.StadiumDTO;
 import com.bcc.soccer.service.StadiumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,12 @@ public class StadiumController {
     @GetMapping("/after-year/{year}")
     public ResponseEntity<List<StadiumDTO>> findAllTeamsStadiumAfter(@PathVariable int year) {
         List<StadiumDTO> dbStadiums = stadiumService.findAllTeamsStadiumAfter(year);
+        return ResponseEntity.status(200).body(dbStadiums);
+    }
+
+    @GetMapping("/search-in-name/{search}")
+    public ResponseEntity<List<StadiumDTO>> findStadiumsByNameContaining(String search) {
+        List<StadiumDTO> dbStadiums = stadiumService.findStadiumsByNameContaining(search);
         return ResponseEntity.status(200).body(dbStadiums);
     }
 

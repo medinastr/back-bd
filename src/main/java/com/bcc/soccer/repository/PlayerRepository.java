@@ -22,4 +22,16 @@ public interface PlayerRepository extends JpaRepository<Player, Integer> {
             "FROM Player p " +
             "GROUP BY p.team.name")
     List<TeamPlayerCountDTO> countPlayersByTeam();
+
+    @Query("SELECT p FROM Player p WHERE p.name LIKE :letter%")
+    List<Player> findByFirstLetter(@Param("letter") String letter);
+
+    @Query("SELECT p FROM Player p WHERE p.name LIKE %:searchString%")
+    List<Player> findPlayersByNameContaining(@Param("searchString") String searchString);
+
+    @Query("SELECT p FROM Player p WHERE p.position LIKE %:suffix")
+    List<Player> findPlayersByPositionEndingWith(@Param("suffix") String suffix);
+
+    @Query("SELECT p FROM Player p WHERE LENGTH(p.name) = :length")
+    List<Player> findPlayersByNameLength(@Param("length") int length);
 }

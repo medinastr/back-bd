@@ -15,4 +15,7 @@ public interface StadiumRepository extends JpaRepository<Stadium, Integer> {
             "FROM Stadium s " +
             "WHERE s.id IN (SELECT t.stadium.id FROM Team t WHERE t.foundedYear > :year)")
     List<Stadium> findAllTeamsStadiumAfter(@Param("year") int year);
+
+    @Query("SELECT s FROM Stadium s WHERE s.name LIKE %:searchString%")
+    List<Stadium> findStadiumsByNameContaining(@Param("searchString") String searchString);
 }

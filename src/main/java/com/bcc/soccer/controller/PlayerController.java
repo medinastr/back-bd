@@ -54,6 +54,30 @@ public class PlayerController {
         return ResponseEntity.status(200).body(counts);
     }
 
+    @GetMapping("/first-letter/{letter}")
+    public ResponseEntity<List<PlayerDTO>> findByFirstLetter(@PathVariable String letter) {
+        List<PlayerDTO> dbPlayers = playerService.findByFirstLetter(letter);
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/search-in-name/{search}")
+    public ResponseEntity<List<PlayerDTO>> findPlayersByNameContaining(@PathVariable String search) {
+        List<PlayerDTO> dbPlayers = playerService.findPlayersByNameContaining(search);
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/position-suffix/{suffix}")
+    public ResponseEntity<List<PlayerDTO>> findPlayersByPositionEndingWith(@PathVariable String suffix) {
+        List<PlayerDTO> dbPlayers = playerService.findPlayersByPositionEndingWith(suffix);
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
+    @GetMapping("/find-name-length/{length}")
+    public ResponseEntity<List<PlayerDTO>> findPlayersByNameLength(@PathVariable int length) {
+        List<PlayerDTO> dbPlayers = playerService.findPlayersByNameLength(length);
+        return ResponseEntity.status(200).body(dbPlayers);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<PlayerDTO> updatePlayer(@PathVariable int id, @RequestBody PlayerDTO playerDTO) {
         PlayerDTO dbPlayer = playerService.updatePlayer(id, playerDTO);
